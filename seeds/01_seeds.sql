@@ -33,3 +33,10 @@ INSERT INTO guest_reviews (id, rating, message, guest_id, owner_id, reservation_
   VALUES (1, 5, 'message', 1, 1, 1),
   (2, 5, 'message', 2, 2, 2),
   (3, 5, 'message', 3, 3, 3);
+
+ALTER SEQUENCE users_id_seq RESTART WITH 4;
+ALTER SEQUENCE properties_id_seq RESTART WITH 4;
+ALTER SEQUENCE rates_id_seq RESTART WITH 4;
+ALTER SEQUENCE reservations_id_seq RESTART WITH 4;
+ALTER SEQUENCE property_reviews_id_seq RESTART WITH 4;
+ALTER SEQUENCE guest_reviews_id_seq RESTART WITH 4;
