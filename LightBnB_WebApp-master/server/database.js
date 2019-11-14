@@ -79,7 +79,7 @@ const addUser = function(user) {
     .query(
       `
     INSERT INTO users
-      (name, password, email) 
+      (name, email, password) 
       VALUES ($1, $2, $3)
       RETURNING *;
     `,
