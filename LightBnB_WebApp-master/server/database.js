@@ -1,14 +1,15 @@
-const properties = require('./json/properties.json');
-const users = require('./json/users.json');
-const { Pool } = require('pg');
+// const properties = require('./json/properties.json');
+// const users = require('./json/users.json');
+// const { Pool } = require('pg');
+const db = require('../db/index.js');
 
 // @ts-ignore
-const pool = new Pool({
-  user: 'vagrant',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb'
-});
+// const pool = new Pool({
+//   user: 'vagrant',
+//   password: '123',
+//   host: 'localhost',
+//   database: 'lightbnb'
+// });
 
 /// Users
 
@@ -20,7 +21,7 @@ const pool = new Pool({
 const getUserWithEmail = function(email) {
   // console.log('user email');
   // console.log(email);
-  return pool
+  return db
     .query(
       `
 SELECT * FROM users WHERE email = $1;
@@ -53,7 +54,7 @@ exports.getUserWithEmail = getUserWithEmail;
 const getUserWithId = function(id) {
   // console.log('user id');
   // console.log(id);
-  return pool
+  return db
     .query(
       `
   SELECT * FROM users WHERE id = $1;
@@ -75,7 +76,7 @@ exports.getUserWithId = getUserWithId;
  */
 const addUser = function(user) {
   // console.log(user);
-  return pool
+  return db
     .query(
       `
     INSERT INTO users
@@ -105,7 +106,7 @@ exports.addUser = addUser;
  */
 const getAllReservations = function(guest_id, limit = 10) {
   // console.log(guest_id);
-  return pool
+  return db
     .query(
       `
       SELECT properties.*, reservations.*, avg(rating) as average_rating
@@ -184,7 +185,7 @@ const getAllProperties = function(options, limit = 20) {
 
   // console.log(queryString, queryParams);
 
-  return pool
+  return db
     .query(queryString, queryParams)
     .then(res => res.rows)
     .catch(error => {
@@ -206,7 +207,7 @@ exports.getAllProperties = getAllProperties;
  */
 const addProperty = function(property) {
   // console.log(property);
-  return pool
+  return db
     .query(
       `
   INSERT INTO properties
